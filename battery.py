@@ -1,0 +1,4 @@
+
+
+class BatteryChecker:
+    pass
