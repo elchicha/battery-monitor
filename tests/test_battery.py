@@ -10,7 +10,7 @@ def test_get_battery_percentage():
     checker = BatteryChecker()
     level = checker.get_percentage()
     assert isinstance(level, (int, float))
-    assert level >= 0 and level <= 100
+    assert 0 <= level <= 100
 
 
 def test_get_charging_status():
@@ -26,4 +26,20 @@ def test_get_time_remaining():
     print(f"Time left: {time_remaining} minutes")
     assert time_remaining is None or (
         isinstance(time_remaining, (int, float)) and time_remaining >= 0
+    )
+
+
+def test_get_battery_info_returns_dict():
+    checker = BatteryChecker()
+    info = checker.get_battery_info()
+    print(info)
+    assert isinstance(info, dict)
+    assert "percentage" in info
+    assert "is_charging" in info
+    assert "time_remaining" in info
+    assert isinstance(info["percentage"], (int, float))
+    assert isinstance(info["is_charging"], bool)
+    assert (
+        isinstance(info["time_remaining"], (int, float))
+        or info["time_remaining"] is None
     )
