@@ -41,3 +41,15 @@ class BatteryChecker:
         else:
             time_remaining = charge_now / power_now
         return time_remaining * 60
+
+    def get_battery_info(self):
+        """Retrieve detailed battery information.
+
+        Returns:
+            dict: Dictionary containing battery percentage, charging status, and time remaining.
+        """
+        return {
+            "percentage": self.get_percentage(),
+            "is_charging": self.is_charging(),
+            "time_remaining": self.get_time_remaining(),
+        }
